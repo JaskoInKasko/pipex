@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_print_uhex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsakanov <jsakanov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/25 16:14:46 by jsakanov          #+#    #+#             */
-/*   Updated: 2023/12/25 16:16:58 by jsakanov         ###   ########.fr       */
+/*   Created: 2023/10/12 14:51:48 by jsakanov          #+#    #+#             */
+/*   Updated: 2023/10/12 15:01:46 by jsakanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "pipex.h"
+#include "ft_printf.h"
 
-int	main(int argc, char *argv[], char *envp[])
+unsigned int	ft_print_uhex(unsigned int n, int len)
 {
-    
+	char	*base;
+
+	base = "0123456789ABCDEF";
+	if (n >= 16)
+	{
+		len += ft_print_uhex(n / 16, 0);
+		len += ft_print_uhex(n % 16, 0);
+	}
+	else if (n <= 16)
+		len += ft_printchar(base[n]);
+	return (len);
 }
