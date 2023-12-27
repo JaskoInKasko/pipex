@@ -13,14 +13,50 @@
 #include <errno.h>
 #include <stdio.h>
 
+void    ft_pipex_init(t_pipex *pipex)
+{
+    pipex->pid1 = 0;
+    pipex->pid2 = 0;
+    pipex->path = NULL;
+    pipex->cmd = NULL;
+    pipex->cmd_args = NULL;
+}
+
+char    *ft_find_path(char *envp[])
+{
+    int i;
+
+    i = 0;
+    while(envp[i] != NULL)
+    {
+        if(ft_strncmp("PATH", envp[i], 4) == 0)
+            return (envp[i]);
+        i++;
+    }
+    return (NULL);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
+    t_pipex pipex;
+
     if(argc == 5)
     {
-
+        ft_pipex_init(&pipex);
+        pipex.path = ft_find_path(envp);
+        pipex.cmd = ft_get_cmd(pipex.path);
+        /*int pid = fork();
+        if(pid == -1)
+            perror("Error:");
+        if(pid == 0)
+            child_process();
+        waitpid(pid, NULL, 0);
+        parent_process();*/
     }
     else
-        perror("Here");
+    {
         ft_printf("Error: Wrong amount of Arguments! Expected 5!\n");
+        ft_printf("Example: file1 cmd1 cmd2 file2\n");
+    }
     return (0);
 }
