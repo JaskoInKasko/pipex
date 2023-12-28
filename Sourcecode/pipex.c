@@ -10,30 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../Inc/pipex.h"
-#include <errno.h>
-#include <stdio.h>
 
-void    ft_pipex_init(t_pipex *pipex)
+void    ft_pipex_init(t_pipex *pipex, char *argv[])
 {
     pipex->pid1 = 0;
     pipex->pid2 = 0;
+    pipex->infile = argv[1];
+    pipex->outfile = argv[4];
     pipex->path = NULL;
-    pipex->cmd = NULL;
     pipex->cmd_args = NULL;
 }
 
-char    *ft_find_path(char *envp[])
+void    ft_get_paths_and_cmds(t_pipex *pipex, char *argv[], char *envp[])
 {
-    int i;
-
-    i = 0;
-    while(envp[i] != NULL)
-    {
-        if(ft_strncmp("PATH", envp[i], 4) == 0)
-            return (envp[i]);
-        i++;
-    }
-    return (NULL);
+        pipex->path = ft_find_path(envp);
+        pipex->paths = ft_split(pipex->path, ':');
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -42,20 +33,22 @@ int	main(int argc, char *argv[], char *envp[])
 
     if(argc == 5)
     {
-        ft_pipex_init(&pipex);
-        pipex.path = ft_find_path(envp);
-        pipex.cmd = ft_get_cmd(pipex.path);
-        /*int pid = fork();
-        if(pid == -1)
+        ft_pipex_init(&pipex, argv);
+        ft_get_paths_and_cmds(&pipex, argv, envp);
+        pipex.pid1 = fork();
+        if (pipex.pid1 == -1)
             perror("Error:");
-        if(pid == 0)
-            child_process();
-        waitpid(pid, NULL, 0);
-        parent_process();*/
+        if (pipex.pid1 == 0)
+            ft_child_process(&pipex, argv);
+        pipex.pid2 = fork();
+        if (pipex.pid1 == -1)
+            perror("Error:");
+        if (pipex.pid2 == 0)
+            ft_child_process2(&pipex, argv);
     }
     else
     {
-        ft_printf("Error: Wrong amount of Arguments! Expected 5!\n");
+        ft_printf("Error: Wrong amount of Arguments! Expected 4!\n");
         ft_printf("Example: file1 cmd1 cmd2 file2\n");
     }
     return (0);
