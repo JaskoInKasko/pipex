@@ -14,18 +14,24 @@ char    *ft_find_path(char *envp[])
     return (NULL);
 }
 
-char    *ft_get_cmd_path(char    **paths, char  **cmd_args)
+char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
 {
     char    *path;
+    char    *tmp;
 
     path = NULL;
+    tmp = NULL;
     while(*paths != NULL)
     {
         if (ft_strncmp("/usr/bin", *paths, 8) == 0)
         {
-            path = ft_strjoin_free(*paths, "/");
-            path = ft_strjoin_free(path, cmd_args[0]);
-            ft_printf("%s\n", path);
+            tmp = ft_strjoin_free(*paths, "/");
+            if(!tmp)
+                ft_errors(pipex, 7);
+            path = ft_strjoin_free(tmp, cmd_args[0]);
+            free(tmp);
+            /*if(access("", F_OK) != 0)
+                ft_errors();*/              //check for file permission 
             return (path);
         }
         paths++;

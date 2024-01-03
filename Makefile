@@ -1,7 +1,8 @@
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g
 HEAD = pipex.h
 SRC = Sourcecode/pipex.c Sourcecode/pipex_utils.c Sourcecode/childs.c Sourcecode/errors.c\
+Sourcecode/free_all.c\
 
 OBJ = $(SRC:.c=.o)
 NAME = pipex

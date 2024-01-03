@@ -13,10 +13,10 @@
 
 typedef struct s_pipex
 {
+    int     i;
+    int     fd[2];
     int     pid1;
     int     pid2;
-    char    *infile;
-    char    *outfile;
     char    *path;
     char    **paths;
     char    *cmd_path;
@@ -25,13 +25,15 @@ typedef struct s_pipex
 
 //      PIPEX_UTILS
 char    *ft_find_path(char *envp[]);
-char    *ft_get_cmd_path(char    **paths, char  **cmd_args);
+char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args);
 
 //      CHILDS
-void    ft_child_process(t_pipex *pipex, char *argv[]);
-void    ft_child_process2(t_pipex *pipex, char *argv[]);
+void    ft_child_process(t_pipex *pipex, char *argv[], char *envp[]);
+void    ft_child_process2(t_pipex *pipex, char *argv[], char *envp[]);
 
 //      ERRORS
 void    ft_errors(t_pipex *pipex, int n);
 
+//      FREE_ALL
+void    ft_free_all(t_pipex *pipex, int n);
 #endif
