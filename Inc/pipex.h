@@ -3,8 +3,9 @@
 //  perror
 #include <errno.h>
 #include <stdio.h>
-//  waitpid / open
+//  waitpid / open / fork
 #include <sys/types.h>
+#include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
