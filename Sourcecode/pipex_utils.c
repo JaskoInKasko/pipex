@@ -23,15 +23,15 @@ char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
         pipex->i++;
         tmp = ft_strjoin_free(*paths, "/");
         if(!tmp)
-            ft_errors(pipex, 7);
+            ft_errors(pipex, 22);
         path = ft_strjoin_free(tmp, cmd_args[0]);
         if(!path)
-            ft_errors(pipex, 8);
+            ft_errors(pipex, 23);
         if(access(path, F_OK) == 0)
             return (path);
         free(path);
         paths++;
     }
-    ft_errors(pipex, 10);
+    ft_errors(pipex, 24);
     return (NULL);
 }

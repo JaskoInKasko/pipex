@@ -17,10 +17,12 @@ void    ft_pipex_init(t_pipex *pipex, char *argv[])
     pipex->i2 = 0;
     pipex->pid1 = 0;
     pipex->pid2 = 0;
-    pipex->fd[0] = 0;
-    pipex->fd[1] = 0;
-    pipex->child_fd = 0;
-    pipex->child2_fd = 0;
+    pipex->fd[0] = -1;
+    pipex->fd[1] = -1;
+    pipex->pipe_dup = -1;
+    pipex->fd_dup = -1;
+    pipex->child_fd = -1;
+    pipex->child2_fd = -1;
     pipex->infile = argv[1];
     pipex->outfile = argv[4];
     pipex->path = NULL;

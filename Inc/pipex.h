@@ -17,6 +17,8 @@ typedef struct s_pipex
     int     i;
     int     i2;
     int     fd[2];
+    int     pipe_dup;
+    int     fd_dup;
     char    *infile;
     char    *outfile;
     int     pid1;

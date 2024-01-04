@@ -3,25 +3,31 @@
 void    ft_errors2(t_pipex *pipex, int n)
 {
     if(n == 5)
-        ft_putstr_fd("Error!\ndup2() function has failed!\n", STDERR_FILENO);
+        ft_putstr_fd("Error!\nFirst dup2() function has failed!\n", STDERR_FILENO);
     if(n == 5)
         ft_free_all(pipex, 1);
-    if(n == 6)
+    if(n == 20)
+        ft_putstr_fd("Error!\nSecond dup2() function has failed!\n", STDERR_FILENO);
+    if(n == 20)
+        ft_free_all(pipex, 20);
+    if(n == 21)
         ft_putstr_fd("Error!\nChild split() function has failed!\n", STDERR_FILENO);
-    if(n == 6)
-        ft_free_all(pipex, 1);
-    if(n == 7)
+    if(n == 21)
+        ft_free_all(pipex, 21);
+    if(n == 22)
         ft_putstr_fd("Error!\nFirst ft_strjoin_free function has failed!\n", STDERR_FILENO);
-    if(n == 8)
+    if(n == 23)
         ft_putstr_fd("Error!\nSecond ft_strjoin_free function has failed!\n", STDERR_FILENO);
-    if(n == 7 || n == 8)
-        ft_free_all(pipex, 2);
-    if(n == 9)
-        ft_free_all(pipex, 3);
-    if(n == 10)
+    if(n == 22 || n == 23)
+        ft_free_all(pipex, 22);
+    if(n == 25)
+        ft_putstr_fd("Error!\nexecve() function has failed!\n", STDERR_FILENO);
+    if(n == 25)
+        ft_free_all(pipex, 25);
+    if(n == 24)
         ft_putstr_fd("Error!\nCommand not found!\n", STDERR_FILENO);
-    if(n == 10)
-        ft_free_all(pipex, 3);
+    if(n == 24)
+        ft_free_all(pipex, 24);
 }
 
 void    ft_errors(t_pipex *pipex, int n)
