@@ -13,7 +13,6 @@ char    *ft_find_path(char *envp[])
 
 char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
 {
-    (void)cmd_args;
     char    *path;
     char    *tmp;
 

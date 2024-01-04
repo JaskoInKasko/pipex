@@ -17,8 +17,12 @@ typedef struct s_pipex
     int     i;
     int     i2;
     int     fd[2];
+    char    *infile;
+    char    *outfile;
     int     pid1;
     int     pid2;
+    int     child_fd;
+    int     child2_fd;
     char    *path;
     char    **paths;
     char    *cmd_path;

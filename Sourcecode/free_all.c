@@ -2,11 +2,7 @@
 
 void    ft_free_all(t_pipex *pipex, int n)
 {
-    if(n == 0)
-        close(pipex->fd[0]);
-    if(n == 0)
-        close(pipex->fd[1]);
-    if(n == 0 || n == 1 || n == 2 || n == 3)
+    if(n == 1 || n == 2 || n == 3)
     {
         while(pipex->paths[pipex->i] != NULL)
         {
@@ -23,6 +19,12 @@ void    ft_free_all(t_pipex *pipex, int n)
             pipex->i2++;
         }
         free(pipex->cmd_args);
+    }
+    if(pipex->fd[0] != 0 || pipex->fd[1] != 0
+        || pipex->fd[0] != -1 || pipex->fd[1] != -1)
+    {
+    close(pipex->fd[0]);
+    close(pipex->fd[1]);
     }
     if(n == 3)
         free(pipex->cmd_path);

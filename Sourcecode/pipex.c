@@ -11,12 +11,18 @@
 /* ************************************************************************** */
 #include "../Inc/pipex.h"
 
-void    ft_pipex_init(t_pipex *pipex)
+void    ft_pipex_init(t_pipex *pipex, char *argv[])
 { 
     pipex->i = 0;
     pipex->i2 = 0;
     pipex->pid1 = 0;
     pipex->pid2 = 0;
+    pipex->fd[0] = 0;
+    pipex->fd[1] = 0;
+    pipex->child_fd = 0;
+    pipex->child2_fd = 0;
+    pipex->infile = argv[1];
+    pipex->outfile = argv[4];
     pipex->path = NULL;
     pipex->paths = NULL;
     pipex->cmd_path = NULL;
@@ -37,7 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 
     if(argc == 5)
     {
-        ft_pipex_init(&pipex);
+        ft_pipex_init(&pipex, argv);
         ft_get_paths(&pipex, envp);
     	if(pipe(pipex.fd) == -1)
             ft_errors(&pipex, 2);
@@ -47,13 +53,15 @@ int	main(int argc, char *argv[], char *envp[])
         if (pipex.pid1 == 0)
             ft_child_process(&pipex, argv, envp);
         pipex.pid2 = fork();
-        if (pipex.pid1 == -1)
+        if (pipex.pid2 == -1)
             perror("Error:");       //replace perror
         if (pipex.pid2 == 0)
             ft_child_process2(&pipex, argv, envp);
+        close(pipex.fd[0]);
+        close(pipex.fd[1]);
         waitpid(pipex.pid1, NULL, 0);
         waitpid(pipex.pid2, NULL, 0);
-        ft_free_all(&pipex, 0);
+        ft_free_all(&pipex, 1);
     }
     ft_errors(&pipex, 0);
     return (0);
