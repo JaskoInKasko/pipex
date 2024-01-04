@@ -13,6 +13,7 @@ char    *ft_find_path(char *envp[])
 
 char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
 {
+    (void)cmd_args;
     char    *path;
     char    *tmp;
 
@@ -20,6 +21,7 @@ char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
     tmp = NULL;
     while(*paths != NULL)
     {
+        pipex->i++;
         tmp = ft_strjoin_free(*paths, "/");
         if(!tmp)
             ft_errors(pipex, 7);
@@ -28,7 +30,9 @@ char    *ft_get_cmd_path(t_pipex *pipex, char **paths, char **cmd_args)
             ft_errors(pipex, 8);
         if(access(path, F_OK) == 0)
             return (path);
+        free(path);
         paths++;
     }
+    ft_errors(pipex, 10);
     return (NULL);
 }

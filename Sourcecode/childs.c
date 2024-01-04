@@ -20,9 +20,9 @@ void    ft_child_process(t_pipex *pipex, char *argv[], char *envp[])
 
 void    ft_child_process2(t_pipex *pipex, char *argv[], char *envp[])
 {
-    int fd = open("Sourcecode/outfile",  O_RDWR | O_TRUNC | O_CREAT, 000644);
+    int fd = open("Sourcecode/outfile",  O_RDWR, O_CREAT);
     if(fd == -1)
-        ft_errors(pipex, 4);
+        ft_errors(pipex, 3);
     if(dup2(pipex->fd[0], 0) == -1)
         ft_errors(pipex, 5);
     close(pipex->fd[1]);

@@ -15,6 +15,7 @@
 typedef struct s_pipex
 {
     int     i;
+    int     i2;
     int     fd[2];
     int     pid1;
     int     pid2;

@@ -14,6 +14,7 @@
 void    ft_pipex_init(t_pipex *pipex)
 { 
     pipex->i = 0;
+    pipex->i2 = 0;
     pipex->pid1 = 0;
     pipex->pid2 = 0;
     pipex->path = NULL;
@@ -26,7 +27,7 @@ void    ft_get_paths(t_pipex *pipex, char *envp[])
 {
         pipex->path = ft_find_path(envp);
         pipex->paths = ft_split(pipex->path, ':');
-        if(!pipex->paths)
+        if (!pipex->paths)
             ft_errors(pipex, 1);
 }
 
@@ -47,19 +48,13 @@ int	main(int argc, char *argv[], char *envp[])
             ft_child_process(&pipex, argv, envp);
         pipex.pid2 = fork();
         if (pipex.pid1 == -1)
-            perror("Error:");
+            perror("Error:");       //replace perror
         if (pipex.pid2 == 0)
             ft_child_process2(&pipex, argv, envp);
-        close(pipex.fd[0]);
-        close(pipex.fd[1]);
         waitpid(pipex.pid1, NULL, 0);
         waitpid(pipex.pid2, NULL, 0);
-        ft_free_all(&pipex, 1);
+        ft_free_all(&pipex, 0);
     }
-    else
-    {
-        ft_printf("Error: Wrong amount of Arguments! Expected 4!\n");
-        ft_printf("Example: file1 cmd1 cmd2 file2\n");
-    }
+    ft_errors(&pipex, 0);
     return (0);
 }
