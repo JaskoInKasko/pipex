@@ -11,17 +11,6 @@
 /* ************************************************************************** */
 #include "../Inc/pipex.h"
 
-void	ft_errors3(t_pipex *pipex, int n)
-{
-	if(pipex->pid2 == -1)
-		waitpid(pipex->pid1, NULL, 0);
-	if (n == 0)
-	{
-		ft_printf("Error: Wrong amount of Arguments! Expected 4!\n");
-		ft_printf("Example: file1 cmd1 cmd2 file2\n");
-		return ;
-	}
-}
 void	ft_errors2(t_pipex *pipex, int n)
 {
 	if (n == 20)
