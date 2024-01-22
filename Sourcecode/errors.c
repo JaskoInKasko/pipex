@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "../Inc/pipex.h"
 
+void	ft_errors2(t_pipex *pipex, int n)
 void	ft_errors3(t_pipex *pipex, int n)
 {
 	if(pipex->pid2 == -1)
