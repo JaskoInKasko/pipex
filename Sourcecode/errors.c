@@ -22,7 +22,7 @@ void	ft_errors3(t_pipex *pipex, int n)
 		return ;
 	}
 }
-void	ft_errors2(t_pipex *pipex, int n)
+void	ft_errors2(int n)
 {
 	if (n == 20)
 		ft_putstr_fd("Error!\nSecond dup2() function has failed!\n",
