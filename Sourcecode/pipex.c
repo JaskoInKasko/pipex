@@ -56,7 +56,7 @@ int	main(int argc, char *argv[], char *envp[])
 			ft_child_process(&pipex, argv, envp);
 		pipex.pid2 = fork();
 		if (pipex.pid2 == -1)
-			ft_errors(&pipex, 3);
+			ft_errors(&pipex, 4);
 		if (pipex.pid2 == 0)
 			ft_child_process2(&pipex, argv, envp);
 		ft_check_fd(&pipex, 26);

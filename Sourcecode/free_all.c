@@ -13,8 +13,7 @@
 
 void	ft_check_fd(t_pipex *pipex, int n)
 {
-	if (n != 1 && n != 20 && n != 21 && n != 22
-		&& n != 25)
+	if (n != 2 && n != 20 && n != 21 && n != 22 && n != 25)
 	{
 		close(pipex->fd[0]);
 		close(pipex->fd[1]);
@@ -34,8 +33,8 @@ void	ft_check_fd(t_pipex *pipex, int n)
 
 void	ft_free_all(t_pipex *pipex, int n)
 {
-	if (n == 1 || n == 20 || n == 21
-		|| n == 22 || n == 25)
+	if (n == 1 || n == 2 || n == 3 || n == 20
+		|| n == 21 || n == 22 || n == 25)
 	{
 		while (pipex->paths[pipex->i] != NULL)
 		{
@@ -56,5 +55,7 @@ void	ft_free_all(t_pipex *pipex, int n)
 	if (n == 25)
 		free(pipex->cmd_path);
 	ft_check_fd(pipex, n);
+	if (n == 3)
+		waitpid(pipex->pid1, NULL, 0);
 	exit(EXIT_FAILURE);
 }
