@@ -36,7 +36,7 @@ void	ft_child_process(t_pipex *pipex, char *argv[], char *envp[])
 void	ft_child_process2(t_pipex *pipex, char *argv[], char *envp[])
 {
 	pipex->child2_fd = open(pipex->outfile,
-			O_RDWR | O_CREAT | O_TRUNC, 0000644);
+			O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (pipex->child2_fd == -1)
 		ft_errors(pipex, 5);
 	pipex->pipe_dup = dup2(pipex->fd[0], 0);
